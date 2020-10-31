@@ -1,0 +1,100 @@
+.page {
+    @include flex-center;
+    flex-direction: column;
+    margin: auto;
+    min-height: calc(100vh - 100px);
+    max-width: 75rem;
+
+    &-title {
+        margin: 30px;
+        padding: 20px;
+        width: 80%;
+        border-bottom: 2px solid rgba($primary, 0.7);
+        border-radius: 5px;
+    }
+
+    &-title::before {
+        @include pseudo-elements;
+        transform: translateY(58px);
+        animation: expand-width-before 2s forwards
+            cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    &-title::after {
+        @include pseudo-elements;
+        transform: translateY(35px);
+        animation: expand-width-after 1s forwards
+            cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    &-body {
+        margin-bottom: 50px;
+
+        .page-content {
+            margin-bottom: 50px;
+
+            &-main {
+                @include flex-center;
+                margin: 20px 20px 50px;
+                max-width: calc(100vw - 10px);
+                text-align: left;
+
+                .page-text {
+                    .page-sub-title {
+                        display: grid;
+                        width: 100%;
+
+                        h3 {
+                            width: 50%;
+                            min-width: fit-content;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            word-wrap: normal;
+                            border-bottom: 1px solid $primary;
+                        }
+                    }
+                }
+            }
+        }
+
+        .page-content::after {
+            @include pseudo-elements;
+            width: 100%;
+            animation: expand-width-after 1s forwards
+                cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+    }
+
+    &-skeleton {
+        min-height: 250vh;
+    }
+
+    @keyframes expand-width-before {
+        0% {
+            max-width: 0%;
+            opacity: 0%;
+        }
+        20% {
+            opacity: 20%;
+        }
+        80% {
+            opacity: 80%;
+        }
+        100% {
+            max-width: 90%;
+            opacity: 100%;
+        }
+    }
+
+    @keyframes expand-width-after {
+        0% {
+            max-width: 0%;
+            opacity: 0%;
+        }
+        100% {
+            max-width: 80%;
+            opacity: 90%;
+        }
+    }
+}
